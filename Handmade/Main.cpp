@@ -30,6 +30,7 @@
 #include "Sprite.h"
 #include "Animation.h"
 #include "Audio.h"
+#include "Background.h"
 
 
 //screen width and height values
@@ -52,10 +53,16 @@ int main(int argc, char* args[])
 	TheScreen::Instance()->Initialize(gameName.c_str(), screenWidth, screenHeight);
 	TheScreen::Instance()->SetClearColor(0, 0, 0);
 
+
+	
 	//initialize audio
 	TheAudio::Instance()->Initialize();
 
 	TheTexture::Instance()->Initialize();
+
+
+	Background* background = new Background;
+
 
 	TheTexture::Instance()->LoadTextureFromFile("Assets/Textures/Background.jpg", "BACKGROUND");
 	TheTexture::Instance()->LoadTextureFromFile("Assets/Sprites/objects.png", "OBJECTS");
@@ -65,15 +72,15 @@ int main(int argc, char* args[])
 
 	TheAudio::Instance()->LoadFromFile("Assets/Audio/Ambient.ogg", AudioManager::MUSIC_AUDIO, "BACK_MUSIC");
 
-	Audio audio;
-	audio.SetAudio("BACK_MUSIC", Audio::MUSIC_AUDIO);
-	audio.SetVolume(50);
-	audio.Play();
+	//Audio audio;
+	//audio.SetAudio("BACK_MUSIC", Audio::MUSIC_AUDIO);
+	//audio.SetVolume(50);
+	//audio.Play();
 
-	Sprite background;
-	background.SetTexture("BACKGROUND");
-	background.SetSpriteDimension(1024, 768);
-	background.SetTextureDimension(1, 1, 1024, 768);
+	//Sprite background;
+	//background.SetTexture("BACKGROUND");
+	//background.SetSpriteDimension(1024, 768);
+	//background.SetTextureDimension(1, 1, 1024, 768);
 
 
 	Sprite barrel;
@@ -119,6 +126,7 @@ int main(int argc, char* args[])
 
 
 	static float posX = 600;
+	static float posY = 300;
 
 
 	//main game loop!
@@ -134,6 +142,8 @@ int main(int argc, char* args[])
 		//read keyboard state
 		keys = TheInput::Instance()->GetKeyStates();
 
+		background->Draw();
+
 		//if game window's top right X is clicked flag game to end
 		if (TheInput::Instance()->IsXClicked())
 		{
@@ -146,8 +156,16 @@ int main(int argc, char* args[])
 			endGame = true;
 		}
 
+
+		glm::vec2 mouseMotion = TheInput::Instance()->GetMouseMotion();
+
+		//std::cout << mouseMotion.x << ", " << mouseMotion.y << std::endl;
+
+		glm::vec2 mousePos = TheInput::Instance()->GetMousePosition();
+
+		//std::cout << mousePos.x << ", " << mousePos.y << std::endl;
+
 		
-		background.Draw();
 		barrel.Draw(400, 400);
 		box.Draw(400, 500);
 		rock.Draw(400, 600);
@@ -155,12 +173,19 @@ int main(int argc, char* args[])
 		textDraw.Draw(100, 100);
 
 
+		//Player.Draw(int(posX), 400, 0.0, Sprite::HORIZONTAL);
 
-		Player.Draw(int(posX), 400, 0.0, Sprite::HORIZONTAL);
 
-		if (posX >= 600)
+		if (keys[SDL_SCANCODE_D])
 		{
-			posX -= 2.0f;
+			posX += 20.0f;
+			std::cout << "moving right\n";
+			Player.Draw(int(posX), 400, 0.0, Sprite::HORIZONTAL);
+		}
+		else if (keys[SDL_SCANCODE_A])
+		{
+			posX -= 20.0f;
+			std::cout << "moving left\n";
 			Player.Draw(int(posX), 400, 0.0, Sprite::NO_FLIP);
 		}
 
@@ -184,5 +209,4 @@ int main(int argc, char* args[])
 
 	//end application
 	return 0;
-
 }

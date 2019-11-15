@@ -49,6 +49,15 @@
     <Filter Include="Source Files\Components\Visual">
       <UniqueIdentifier>{952c6fe5-7ab9-449b-a46a-397cb483c6b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameObjects">
+      <UniqueIdentifier>{642cee24-4cc0-4478-8898-b1aeffc6c760}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameLogic">
+      <UniqueIdentifier>{c67ada87-f07a-4f83-925b-9bc005ee3a0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameLogic\GameObjects">
+      <UniqueIdentifier>{8b140da0-b846-4402-bf0e-d152a6d54f8e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -87,6 +96,12 @@
     <ClInclude Include="Sphere.h">
       <Filter>Header Files\Components\Collision</Filter>
     </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp">
@@ -124,6 +139,12 @@
     </ClCompile>
     <ClCompile Include="Sphere.cpp">
       <Filter>Source Files\Components\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\GameLogic\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Source Files\GameLogic\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
