@@ -28,7 +28,7 @@ protected:
 	glm::vec2 m_pos;
 	glm::vec2 m_scale;
 	double m_angle;
-
+	
 	bool m_isVisible;
 	bool m_isActive;
 	bool m_isAlive;
