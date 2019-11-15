@@ -25,10 +25,16 @@
 #include "AudioManager.h"
 #include "InputManager.h"
 #include "ScreenManager.h"
+#include "Text.h"
+#include "TextureManager.h"
+#include "Sprite.h"
+#include "Animation.h"
+#include "Audio.h"
+
 
 //screen width and height values
-int screenWidth = 1080;
-int screenHeight = 720;
+int screenWidth = 1024;
+int screenHeight = 768;
 
 //variable for name of game demo
 std::string gameName = "Street Fighting: Bootleg Guttertrash Edition";
@@ -42,13 +48,78 @@ const Uint8* keys = nullptr;
 //------------------------------------------------------------------------------------------------------
 int main(int argc, char* args[])
 {
-
 	//initialise game screen and background rendering color
 	TheScreen::Instance()->Initialize(gameName.c_str(), screenWidth, screenHeight);
 	TheScreen::Instance()->SetClearColor(0, 0, 0);
 
 	//initialize audio
 	TheAudio::Instance()->Initialize();
+
+	TheTexture::Instance()->Initialize();
+
+	TheTexture::Instance()->LoadTextureFromFile("Assets/Textures/Background.jpg", "BACKGROUND");
+	TheTexture::Instance()->LoadTextureFromFile("Assets/Sprites/objects.png", "OBJECTS");
+	TheTexture::Instance()->LoadTextureFromFile("Assets/Sprites/Explosion.png", "EXP");
+	TheTexture::Instance()->LoadTextureFromFile("Assets/Sprites/Hero.png", "PLAYER");
+	TheTexture::Instance()->LoadFontFromFile("Assets/Fonts/Impact.ttf", 100, "FONT");
+
+	TheAudio::Instance()->LoadFromFile("Assets/Audio/Ambient.ogg", AudioManager::MUSIC_AUDIO, "BACK_MUSIC");
+
+	Audio audio;
+	audio.SetAudio("BACK_MUSIC", Audio::MUSIC_AUDIO);
+	audio.SetVolume(50);
+	audio.Play();
+
+	Sprite background;
+	background.SetTexture("BACKGROUND");
+	background.SetSpriteDimension(1024, 768);
+	background.SetTextureDimension(1, 1, 1024, 768);
+
+
+	Sprite barrel;
+	barrel.SetTexture("OBJECTS");
+	barrel.SetSpriteDimension(100, 100);
+	barrel.SetTextureDimension(3, 1, 200, 200);
+	barrel.SetTextureCell(0, 0);
+
+	Sprite box;
+	box.SetTexture("OBJECTS");
+	box.SetSpriteDimension(100, 100);
+	box.SetTextureDimension(3, 1, 200, 200);
+	box.SetTextureCell(1, 0);
+
+
+	Sprite rock;
+	rock.SetTexture("OBJECTS");
+	rock.SetSpriteDimension(100, 100);
+	rock.SetTextureDimension(3, 1, 200, 200);
+	rock.SetTextureCell(2, 0);
+
+	Animation Explosion;
+	Explosion.SetTexture("EXP");
+	Explosion.SetAnimationVelocity(50.0f);
+	Explosion.SetSpriteDimension(400, 400);
+	Explosion.SetTextureDimension(8, 6, 128, 128);
+	Explosion.IsAnimationLooping() = true;	// blow up forever
+
+	Animation Player;
+	Player.SetTexture("PLAYER");
+	Player.SetAnimationVelocity(20.0f);
+	Player.SetSpriteDimension(100, 250);
+	Player.SetTextureDimension(8, 1, 127, 250);
+	Player.IsAnimationLooping() = true;	// blow up forever
+
+
+	Text textDraw;
+	textDraw.SetFont("FONT");
+	textDraw.SetText("Hi There");
+	textDraw.SetColor(100, 100, 100);
+	textDraw.SetSize(400, 200);
+
+
+
+	static float posX = 600;
+
 
 	//main game loop!
 	while (!endGame)
@@ -75,11 +146,36 @@ int main(int argc, char* args[])
 			endGame = true;
 		}
 
+		
+		background.Draw();
+		barrel.Draw(400, 400);
+		box.Draw(400, 500);
+		rock.Draw(400, 600);
+		Explosion.Draw(550, 480);
+		textDraw.Draw(100, 100);
+
+
+
+		Player.Draw(int(posX), 400, 0.0, Sprite::HORIZONTAL);
+
+		if (posX >= 600)
+		{
+			posX -= 2.0f;
+			Player.Draw(int(posX), 400, 0.0, Sprite::NO_FLIP);
+		}
+
+
 		//draw screen by swapping SDL frame buffer
 		TheScreen::Instance()->Draw();
 
 	}
 	
+	TheTexture::Instance()->UnloadFromMemory(TextureManager::TEXTURE_DATA, TextureManager::ALL_DATA);
+	TheTexture::Instance()->UnloadFromMemory(TextureManager::FONT_DATA, TextureManager::ALL_DATA);
+
+
+	TheAudio::Instance()->UnloadFromMemory(AudioManager::MUSIC_AUDIO, AudioManager::ALL_AUDIO);
+
 	//close down audio 
 	TheAudio::Instance()->ShutDown();
 
