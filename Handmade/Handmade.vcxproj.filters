@@ -64,6 +64,12 @@
     <Filter Include="Header Files\Components\CoreGameLogic">
       <UniqueIdentifier>{ee7bc958-f2e7-4327-a757-3b8f7805779f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Components\File">
+      <UniqueIdentifier>{31f39491-c6d0-4bbe-95cd-921ad917ebad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\File">
+      <UniqueIdentifier>{a38c0d38-59bb-464a-b1be-860aef95b86c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -117,6 +123,9 @@
     <ClInclude Include="GameState.h">
       <Filter>Header Files\Components\CoreGameLogic</Filter>
     </ClInclude>
+    <ClInclude Include="File.h">
+      <Filter>Header Files\Components\File</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp">
@@ -160,6 +169,9 @@
     </ClCompile>
     <ClCompile Include="Background.cpp">
       <Filter>Source Files\GameLogic\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="File.cpp">
+      <Filter>Source Files\Components\File</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
