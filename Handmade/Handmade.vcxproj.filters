@@ -61,14 +61,17 @@
     <Filter Include="Header Files\GameLogic\GameObjects">
       <UniqueIdentifier>{642cee24-4cc0-4478-8898-b1aeffc6c760}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Components\CoreGameLogic">
-      <UniqueIdentifier>{ee7bc958-f2e7-4327-a757-3b8f7805779f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Components\File">
       <UniqueIdentifier>{31f39491-c6d0-4bbe-95cd-921ad917ebad}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Components\File">
       <UniqueIdentifier>{a38c0d38-59bb-464a-b1be-860aef95b86c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\States">
+      <UniqueIdentifier>{db125d9b-2a18-4d06-ac1f-76fb9df650aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\States">
+      <UniqueIdentifier>{25666e31-7342-407e-969c-1938b77fd18e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -117,14 +120,23 @@
     <ClInclude Include="Game.h">
       <Filter>Header Files\GameLogic</Filter>
     </ClInclude>
-    <ClInclude Include="StateManager.h">
+    <ClInclude Include="File.h">
+      <Filter>Header Files\Components\File</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateManager.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="GameState.h">
-      <Filter>Header Files\Components\CoreGameLogic</Filter>
+      <Filter>Header Files\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="File.h">
-      <Filter>Header Files\Components\File</Filter>
+    <ClInclude Include="PlayState.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="SplashState.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="TestState.h">
+      <Filter>Header Files\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +184,21 @@
     </ClCompile>
     <ClCompile Include="File.cpp">
       <Filter>Source Files\Components\File</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayState.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="SplashState.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="TestState.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStateManager.cpp">
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
