@@ -1,10 +1,13 @@
 #include "PlayState.h"
+#include "SplashState.h"
 
 
 const std::string PlayState::s_playStateID = "Play";
 
 bool PlayState::Initialize(const std::string name, int width, int height)
 {
+	m_endState = false;
+
 	//initialise game screen and background rendering color
 	TheScreen::Instance()->Initialize(name.c_str(), width, height);
 	TheScreen::Instance()->SetClearColor(0, 0, 0);
@@ -21,6 +24,10 @@ bool PlayState::Initialize(const std::string name, int width, int height)
 	TheTexture::Instance()->LoadFontFromFile("Assets/Fonts/Impact.ttf", 100, "FONT");
 
 	TheAudio::Instance()->LoadFromFile("Assets/Audio/Ambient.ogg", AudioManager::MUSIC_AUDIO, "BACK_MUSIC");
+		
+	//read keyboard state
+	TheInput::Instance()->Update();
+	m_keys = TheInput::Instance()->GetKeyStates();
 
 	//Audio audio;
 	//audio.SetAudio("BACK_MUSIC", Audio::MUSIC_AUDIO);
@@ -75,6 +82,19 @@ bool PlayState::Initialize(const std::string name, int width, int height)
 	return true;
 }
 
+bool PlayState::OnEnter()
+{
+	std::cout << "Entering PlayState" << std::endl;
+	return true;
+}
+
+bool PlayState::OnExit()
+{
+	std::cout << "Exiting PlayState" << std::endl;
+	return true;
+}
+
+
 void PlayState::Draw()
 {
 	barrel.Draw(400, 400);
@@ -96,9 +116,6 @@ void PlayState::Update()
 		//update input handling by listening for input events
 		TheInput::Instance()->Update();
 
-		//read keyboard state
-		m_keys = TheInput::Instance()->GetKeyStates();
-
 		//background->Draw();
 
 		//if game window's top right X is clicked flag game to end
@@ -107,7 +124,8 @@ void PlayState::Update()
 			m_endState = true;
 		}
 
-		//if escape key is pressed flag game to end
+		// if escape key is pressed flag game to end]
+		// Alternative if the statemachine fails
 		if (m_keys[SDL_SCANCODE_ESCAPE])
 		{
 			m_endState = true;
@@ -153,17 +171,15 @@ void PlayState::Update()
 	}
 }
 
-bool PlayState::OnEnter()
+void PlayState::PauseState()
 {
-	std::cout << "Entering PlayState" << std::endl;
-	return true;
 }
 
-bool PlayState::OnExit()
+void PlayState::UnPauseState()
 {
-	std::cout << "Exiting PlayState" << std::endl;
-	return true;
 }
+
+
 
 void PlayState::ClearState()
 {
@@ -178,4 +194,15 @@ void PlayState::ClearState()
 
 	//close down game screen 
 	TheScreen::Instance()->ShutDown();
+}
+
+
+void PlayState::EventHandle()
+{
+	Update();
+
+	if (m_keys[SDL_SCANCODE_RETURN])
+	{
+		m_gameStateManager->ChangeState(new SplashState);
+	}
 }

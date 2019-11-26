@@ -1,5 +1,21 @@
 #include "GameStateManager.h"
 
+void GameStateManager::Draw()
+{
+	if (!m_stateContainer.empty())
+	{
+		m_stateContainer.back()->Draw();
+	}
+}
+
+void GameStateManager::Update()
+{
+	if (!m_stateContainer.empty())
+	{
+		m_stateContainer.back()->Update();
+	}
+}
+
 // Adds the new state to the container 
 void GameStateManager::PushState(GameState* pState)
 {
@@ -43,5 +59,5 @@ void GameStateManager::PopState()
 			m_stateContainer.pop_back();
 		}
 	}
-
 }
+

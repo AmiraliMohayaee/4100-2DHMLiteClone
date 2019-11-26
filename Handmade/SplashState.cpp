@@ -19,6 +19,14 @@ void SplashState::Update()
 
 }
 
+void SplashState::PauseState()
+{
+}
+
+void SplashState::UnPauseState()
+{
+}
+
 bool SplashState::OnEnter()
 {
 	std::cout << "Entering SplashState" << std::endl;
@@ -29,6 +37,10 @@ bool SplashState::OnExit()
 {
 	std::cout << "Exiting SplashState" << std::endl;
 	return true;
+}
+
+void SplashState::EventHandle()
+{
 }
 
 void SplashState::ClearState()

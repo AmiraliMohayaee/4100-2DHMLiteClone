@@ -47,14 +47,15 @@ std::string gameName = "Street Fighting: Bootleg Guttertrash Edition";
 //------------------------------------------------------------------------------------------------------
 int main(int argc, char* args[])
 {
-	//Background* background = new Background;
-	PlayState* playstate = new PlayState::getStateID() = "Play";
+	GameState* playState;
+	playState = new PlayState();
 
-	playState.Initialize(gameName, screenWidth, screenHeight);
 
-	playState.Draw();
-	playState.Update();
-	playState.ClearState();
+	playState->Initialize(gameName, screenWidth, screenHeight);
+
+	playState->Draw();
+	playState->Update();
+	playState->ClearState();
 
 	//end application
 	return 0;

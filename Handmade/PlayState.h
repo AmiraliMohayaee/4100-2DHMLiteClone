@@ -2,6 +2,7 @@
 #define PLAY_STATE_H
 
 #include "GameState.h"
+#include "GameStateManager.h"
 #include "AudioManager.h"
 #include "TextureManager.h"
 #include "InputManager.h"
@@ -24,10 +25,15 @@ public:
 	virtual void Draw();
 	virtual void Update();
 
+	virtual void PauseState();
+	virtual void UnPauseState();
+
 	virtual bool OnEnter();
 	virtual bool OnExit();
 
-	void ClearState();
+	virtual void EventHandle();
+
+	virtual void ClearState();
 
 	virtual std::string getStateID() const
 	{
@@ -46,11 +52,15 @@ private:
 	float posX;
 	float posY;
 
-	bool m_endGame = false;
+	AABB m_p1bounds;
+	AABB m_p2bounds;
+
+	
 	const Uint8* m_keys = nullptr;
 
 	static const std::string s_playStateID;
 
+	GameStateManager* m_gameStateManager;
 };
 
 

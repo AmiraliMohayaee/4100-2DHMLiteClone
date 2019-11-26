@@ -8,6 +8,9 @@
 class GameStateManager
 {
 public:
+	void Draw();
+	void Update();
+	
 	void PushState(GameState* pState);
 	void ChangeState(GameState* pState);
 	void PopState();
