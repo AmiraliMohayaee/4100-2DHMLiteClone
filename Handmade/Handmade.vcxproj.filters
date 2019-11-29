@@ -135,6 +135,9 @@
     <ClInclude Include="TestState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\GameLogic\GameObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp">

@@ -43,35 +43,28 @@ bool PlayState::Initialize(const std::string name, int width, int height)
 	barrel.SetSpriteDimension(100, 100);
 	barrel.SetTextureDimension(3, 1, 200, 200);
 	barrel.SetTextureCell(0, 0);
-
 	
 	box.SetTexture("OBJECTS");
 	box.SetSpriteDimension(100, 100);
 	box.SetTextureDimension(3, 1, 200, 200);
 	box.SetTextureCell(1, 0);
-
-
 	
 	rock.SetTexture("OBJECTS");
 	rock.SetSpriteDimension(100, 100);
 	rock.SetTextureDimension(3, 1, 200, 200);
 	rock.SetTextureCell(2, 0);
-
 	
 	Explosion.SetTexture("EXP");
 	Explosion.SetAnimationVelocity(50.0f);
 	Explosion.SetSpriteDimension(400, 400);
 	Explosion.SetTextureDimension(8, 6, 128, 128);
 	Explosion.IsAnimationLooping() = true;	// blow up forever
-
 	
 	Player.SetTexture("PLAYER");
 	Player.SetAnimationVelocity(20.0f);
 	Player.SetSpriteDimension(100, 250);
 	Player.SetTextureDimension(8, 1, 127, 250);
 	Player.IsAnimationLooping() = true;	// blow up forever
-
-
 	
 	textDraw.SetFont("FONT");
 	textDraw.SetText("Hi There");
@@ -142,8 +135,6 @@ void PlayState::Update()
 
 
 
-
-
 		//Player.Draw(int(posX), 400, 0.0, Sprite::HORIZONTAL);
 
 
@@ -167,6 +158,7 @@ void PlayState::Update()
 
 		//draw screen by swapping SDL frame buffer
 		TheScreen::Instance()->Draw();
+
 
 	}
 }

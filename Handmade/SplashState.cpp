@@ -21,10 +21,12 @@ void SplashState::Update()
 
 void SplashState::PauseState()
 {
+
 }
 
 void SplashState::UnPauseState()
 {
+
 }
 
 bool SplashState::OnEnter()

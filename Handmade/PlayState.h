@@ -52,8 +52,8 @@ private:
 	float posX;
 	float posY;
 
-	AABB m_p1bounds;
-	AABB m_p2bounds;
+	//AABB m_p1bounds;
+	//AABB m_p2bounds;
 
 	
 	const Uint8* m_keys = nullptr;
