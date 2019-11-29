@@ -43,6 +43,7 @@ bool SplashState::OnExit()
 
 void SplashState::EventHandle()
 {
+
 }
 
 void SplashState::ClearState()
