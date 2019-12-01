@@ -10,10 +10,12 @@ bool TestState::Initialize(const std::string name, int width, int height)
 
 void TestState::Draw()
 {
+
 }
 
 void TestState::Update()
 {
+
 }
 
 bool TestState::OnEnter()
