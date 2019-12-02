@@ -197,5 +197,8 @@
     <ClCompile Include="GameStateManager.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\GameLogic\GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

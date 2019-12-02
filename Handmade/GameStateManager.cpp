@@ -44,6 +44,8 @@ void GameStateManager::ChangeState(GameState* pState)
 
 	m_stateContainer.push_back(pState);
 
+	// Once we're finished changing states, 
+	// we'll call the other state
 	m_stateContainer.back()->OnEnter();
 }
 

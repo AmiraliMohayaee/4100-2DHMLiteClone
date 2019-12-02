@@ -32,11 +32,13 @@
 #include "Audio.h"
 #include "Background.h"
 #include "PlayState.h"
+#include "TestState.h"
+#include "GameStateManager.h"
 
 
 //screen width and height values
-int screenWidth = 1024;
-int screenHeight = 768;
+int screenWidth = 1280;
+int screenHeight = 720;
 
 //variable for name of game demo
 std::string gameName = "Street Fighting: Bootleg Guttertrash Edition";
@@ -47,15 +49,12 @@ std::string gameName = "Street Fighting: Bootleg Guttertrash Edition";
 //------------------------------------------------------------------------------------------------------
 int main(int argc, char* args[])
 {
-	GameState* playState;
-	playState = new PlayState();
-
+	PlayState* playState = new PlayState();
 
 	playState->Initialize(gameName, screenWidth, screenHeight);
-
 	playState->Draw();
 	playState->Update();
-	playState->ClearState();
+	//playState->ClearState();
 
 	//end application
 	return 0;

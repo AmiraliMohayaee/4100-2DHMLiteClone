@@ -1,8 +1,7 @@
 #ifndef PLAY_STATE_H
 #define PLAY_STATE_H
 
-#include "GameState.h"
-#include "GameStateManager.h"
+
 #include "AudioManager.h"
 #include "TextureManager.h"
 #include "InputManager.h"
@@ -12,42 +11,34 @@
 #include "Audio.h"
 #include "Animation.h"
 #include "Text.h"
+#include "Background.h"
 #include <string>
 #include <iostream>
 
 
-class PlayState : public GameState
+class PlayState
 {
 public:
 	// Initialize screen and sound pre-requisites
-	virtual bool Initialize(const std::string name, int width, int height);
+	bool Initialize(const std::string name, int width, int height);
 
-	virtual void Draw();
-	virtual void Update();
+	void Draw();
+	void Update();
 
-	virtual void PauseState();
-	virtual void UnPauseState();
+	void EventHandle();
 
-	virtual bool OnEnter();
-	virtual bool OnExit();
+	void ClearState();
 
-	virtual void EventHandle();
-
-	virtual void ClearState();
-
-	virtual std::string getStateID() const
-	{
-		return s_playStateID;
-	}
 
 
 private:
-	Sprite barrel;
-	Sprite box;
-	Sprite rock;
-	Animation Explosion;
-	Animation Player;
-	Text textDraw;
+	GameObject* m_background;
+	Animation m_explosion;
+	Text m_textDraw;
+	Audio m_audio;
+	Sprite m_barrel;
+	Sprite m_box;
+	Sprite m_rock;
 
 	float posX;
 	float posY;
@@ -55,12 +46,9 @@ private:
 	//AABB m_p1bounds;
 	//AABB m_p2bounds;
 
-	
 	const Uint8* m_keys = nullptr;
 
-	static const std::string s_playStateID;
-
-	GameStateManager* m_gameStateManager;
+	bool m_endState;
 };
 
 

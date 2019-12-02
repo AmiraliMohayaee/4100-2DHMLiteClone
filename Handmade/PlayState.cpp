@@ -2,8 +2,6 @@
 #include "SplashState.h"
 
 
-const std::string PlayState::s_playStateID = "Play";
-
 bool PlayState::Initialize(const std::string name, int width, int height)
 {
 	m_endState = false;
@@ -14,13 +12,12 @@ bool PlayState::Initialize(const std::string name, int width, int height)
 
 	//initialize audio
 	TheAudio::Instance()->Initialize();
-
 	TheTexture::Instance()->Initialize();
 
-	TheTexture::Instance()->LoadTextureFromFile("Assets/Textures/Background.jpg", "BACKGROUND");
+	m_background = new Background(glm::vec2(0,0));
+
 	TheTexture::Instance()->LoadTextureFromFile("Assets/Sprites/objects.png", "OBJECTS");
 	TheTexture::Instance()->LoadTextureFromFile("Assets/Sprites/Explosion.png", "EXP");
-	TheTexture::Instance()->LoadTextureFromFile("Assets/Sprites/Hero.png", "PLAYER");
 	TheTexture::Instance()->LoadFontFromFile("Assets/Fonts/Impact.ttf", 100, "FONT");
 
 	TheAudio::Instance()->LoadFromFile("Assets/Audio/Ambient.ogg", AudioManager::MUSIC_AUDIO, "BACK_MUSIC");
@@ -29,72 +26,53 @@ bool PlayState::Initialize(const std::string name, int width, int height)
 	TheInput::Instance()->Update();
 	m_keys = TheInput::Instance()->GetKeyStates();
 
-	//Audio audio;
-	//audio.SetAudio("BACK_MUSIC", Audio::MUSIC_AUDIO);
-	//audio.SetVolume(50);
-	//audio.Play();
-
-	//Sprite background;
-	//background.SetTexture("BACKGROUND");
-	//background.SetSpriteDimension(1024, 768);
-	//background.SetTextureDimension(1, 1, 1024, 768);
-	
-	barrel.SetTexture("OBJECTS");
-	barrel.SetSpriteDimension(100, 100);
-	barrel.SetTextureDimension(3, 1, 200, 200);
-	barrel.SetTextureCell(0, 0);
-	
-	box.SetTexture("OBJECTS");
-	box.SetSpriteDimension(100, 100);
-	box.SetTextureDimension(3, 1, 200, 200);
-	box.SetTextureCell(1, 0);
-	
-	rock.SetTexture("OBJECTS");
-	rock.SetSpriteDimension(100, 100);
-	rock.SetTextureDimension(3, 1, 200, 200);
-	rock.SetTextureCell(2, 0);
-	
-	Explosion.SetTexture("EXP");
-	Explosion.SetAnimationVelocity(50.0f);
-	Explosion.SetSpriteDimension(400, 400);
-	Explosion.SetTextureDimension(8, 6, 128, 128);
-	Explosion.IsAnimationLooping() = true;	// blow up forever
-	
-	Player.SetTexture("PLAYER");
-	Player.SetAnimationVelocity(20.0f);
-	Player.SetSpriteDimension(100, 250);
-	Player.SetTextureDimension(8, 1, 127, 250);
-	Player.IsAnimationLooping() = true;	// blow up forever
-	
-	textDraw.SetFont("FONT");
-	textDraw.SetText("Hi There");
-	textDraw.SetColor(100, 100, 100);
-	textDraw.SetSize(400, 200);
+	m_audio.SetAudio("BACK_MUSIC", Audio::MUSIC_AUDIO);
+	m_audio.SetVolume(50);
+	m_audio.Play();
 
 
-	return true;
-}
+	m_barrel.SetTexture("OBJECTS");
+	m_barrel.SetSpriteDimension(100, 100);
+	m_barrel.SetTextureDimension(3, 1, 200, 200);
+	m_barrel.SetTextureCell(0, 0);
+	
+	m_box.SetTexture("OBJECTS");
+	m_box.SetSpriteDimension(100, 100);
+	m_box.SetTextureDimension(3, 1, 200, 200);
+	m_box.SetTextureCell(1, 0);
+	
+	m_rock.SetTexture("OBJECTS");
+	m_rock.SetSpriteDimension(100, 100);
+	m_rock.SetTextureDimension(3, 1, 200, 200);
+	m_rock.SetTextureCell(2, 0);
+	
+	m_explosion.SetTexture("EXP");
+	m_explosion.SetAnimationVelocity(50.0f);
+	m_explosion.SetSpriteDimension(400, 400);
+	m_explosion.SetTextureDimension(8, 6, 128, 128);
+	m_explosion.IsAnimationLooping() = true;	// blow up forever
+	
+	m_textDraw.SetFont("FONT");
+	m_textDraw.SetText("Hi There");
+	m_textDraw.SetColor(100, 100, 100);
+	m_textDraw.SetSize(400, 200);
 
-bool PlayState::OnEnter()
-{
-	std::cout << "Entering PlayState" << std::endl;
-	return true;
-}
 
-bool PlayState::OnExit()
-{
-	std::cout << "Exiting PlayState" << std::endl;
 	return true;
 }
 
 
 void PlayState::Draw()
 {
-	barrel.Draw(400, 400);
-	box.Draw(400, 500);
-	rock.Draw(400, 600);
-	Explosion.Draw(550, 480);
-	textDraw.Draw(100, 100);
+	m_background->Draw();
+	m_barrel.Draw(400, 400);
+	m_box.Draw(400, 500);
+	m_rock.Draw(400, 600);
+	m_explosion.Draw(550, 480);
+	m_textDraw.Draw(100, 100);
+
+	//draw screen by swapping SDL frame buffer
+	//TheScreen::Instance()->Draw();
 }
 
 void PlayState::Update()
@@ -102,7 +80,8 @@ void PlayState::Update()
 	//main game loop!
 	while (!m_endState)
 	{
-
+	
+		EventHandle();
 		//update screen by clearing SDL frame buffer
 		TheScreen::Instance()->Update();
 
@@ -124,7 +103,6 @@ void PlayState::Update()
 			m_endState = true;
 		}
 
-
 		glm::vec2 mouseMotion = TheInput::Instance()->GetMouseMotion();
 
 		//std::cout << mouseMotion.x << ", " << mouseMotion.y << std::endl;
@@ -132,52 +110,20 @@ void PlayState::Update()
 		glm::vec2 mousePos = TheInput::Instance()->GetMousePosition();
 
 		//std::cout << mousePos.x << ", " << mousePos.y << std::endl;
-
-
-
-		//Player.Draw(int(posX), 400, 0.0, Sprite::HORIZONTAL);
-
-
-		if (m_keys[SDL_SCANCODE_D])
-		{
-			posX += 20.0f;
-			std::cout << "moving right\n";
-			Player.Draw(int(posX), 400, 0.0, Sprite::HORIZONTAL);
-		}
-		else if (m_keys[SDL_SCANCODE_A])
-		{
-			posX -= 20.0f;
-			std::cout << "moving left\n";
-			Player.Draw(int(posX), 400, 0.0, Sprite::NO_FLIP);
-		}
-		else
-		{
-			Player.Draw(int(posX), 400, 0.0);
-		}
-
+		Draw();
 
 		//draw screen by swapping SDL frame buffer
 		TheScreen::Instance()->Draw();
-
-
 	}
 }
-
-void PlayState::PauseState()
-{
-}
-
-void PlayState::UnPauseState()
-{
-}
-
 
 
 void PlayState::ClearState()
 {
+	delete m_background;
+
 	TheTexture::Instance()->UnloadFromMemory(TextureManager::TEXTURE_DATA, TextureManager::ALL_DATA);
 	TheTexture::Instance()->UnloadFromMemory(TextureManager::FONT_DATA, TextureManager::ALL_DATA);
-
 
 	TheAudio::Instance()->UnloadFromMemory(AudioManager::MUSIC_AUDIO, AudioManager::ALL_AUDIO);
 
@@ -191,10 +137,8 @@ void PlayState::ClearState()
 
 void PlayState::EventHandle()
 {
-	Update();
-
-	if (m_keys[SDL_SCANCODE_RETURN])
-	{
-		m_gameStateManager->ChangeState(new SplashState);
-	}
+	//if (m_keys[SDL_SCANCODE_RETURN])
+	//{
+	//	m_gameStateManager->ChangeState(new SplashState);
+	//}
 }

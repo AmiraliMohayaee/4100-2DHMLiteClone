@@ -11,6 +11,8 @@
 #include "Audio.h"
 #include "Animation.h"
 #include "Text.h"
+#include "Background.h"
+#include "GameStateManager.h"
 #include <string>
 #include <iostream>
 
@@ -24,10 +26,15 @@ public:
 	virtual void Draw();
 	virtual void Update();
 
+	virtual void PauseState();
+	virtual void UnPauseState();
+
 	virtual bool OnEnter();
 	virtual bool OnExit();
 
-	void ClearState();
+	virtual void EventHandle();
+
+	virtual void ClearState();
 
 	virtual std::string getStateID() const
 	{
@@ -36,12 +43,27 @@ public:
 
 
 private:
+	Sprite m_barrel;
+	Sprite m_box;
+	Sprite m_rock;
+	Background m_background;
+	Animation m_explosion;
+	Animation m_player;
+	Text m_textDraw;
+	Audio m_audio;
+	GameObject* m_player1;
+	GameObject* m_player2;
+
+
+	float posX;
+	float posY;
 
 	bool m_endGame = false;
 	const Uint8* m_keys = nullptr;
 
 	static const std::string s_testStateID;
 
+	GameStateManager* m_gameStateManager;
 };
 
 
