@@ -33,6 +33,10 @@ public:
 
 private:
 	GameObject* m_background;
+	GameObject* m_player1;
+	GameObject* m_player2;
+
+
 	Animation m_explosion;
 	Text m_textDraw;
 	Audio m_audio;

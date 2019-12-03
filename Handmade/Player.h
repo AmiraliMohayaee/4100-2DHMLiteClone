@@ -28,12 +28,19 @@ public:
 	void IsAvtive(bool flag);
 	void IsVisible(bool flag);
 
+	bool IsColliding(GameObject& go);
+	AABB GetColl();
 
 protected:
 	Sprite m_sprite;
 	Audio m_audio;
 	Animation m_anim;
 	Animation m_lightP;
+	Animation m_walk;
+
+	AABB m_aabb;
+
+	const Uint8* m_keys = nullptr;
 };
 
 #endif

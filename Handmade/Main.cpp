@@ -54,7 +54,7 @@ int main(int argc, char* args[])
 	playState->Initialize(gameName, screenWidth, screenHeight);
 	playState->Draw();
 	playState->Update();
-	//playState->ClearState();
+	playState->ClearState();
 
 	//end application
 	return 0;

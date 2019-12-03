@@ -2,13 +2,13 @@
 
 Background::Background(glm::vec2 pos)
 {
-	TheTexture::Instance()->LoadTextureFromFile("Assets/Textures/level.jpg", "LEVEL");
+	TheTexture::Instance()->LoadTextureFromFile("Assets/Textures/HondaStage.jpg", "LEVEL");
 	m_sprite.SetTexture("LEVEL");
 	m_sprite.SetSpriteDimension(1280, 720);
-	m_sprite.SetTextureDimension(1, 1, 1280, 720);
+	m_sprite.SetTextureDimension(1, 1, 3072, 1234);
 	
 
-	TheAudio::Instance()->LoadFromFile("Assets/Audio/Ambient.ogg", AudioManager::MUSIC_AUDIO, "MUS");
+	TheAudio::Instance()->LoadFromFile("Assets/Audio/GuileTheme.ogg", AudioManager::MUSIC_AUDIO, "MUS");
 	m_music.SetVolume(100);
 	m_music.SetAudio("MUS", Audio::MUSIC_AUDIO);
 	m_music.Play();
