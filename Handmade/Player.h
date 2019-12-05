@@ -38,8 +38,8 @@ protected:
 	Animation m_lightP;
 	Animation m_walk;
 
-	AABB m_aabb;
-
+	// Implementing input for player object as
+	// not all GOs need to get or return input
 	const Uint8* m_keys = nullptr;
 };
 

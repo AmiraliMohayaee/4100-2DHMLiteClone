@@ -25,8 +25,8 @@ Player::Player(glm::vec2 pos)
 	m_walk.SetSpriteDimension(136, 342);
 	m_walk.SetTextureDimension(12, 1, 72, 171);
 
-	m_aabb.SetDimension(136, 342);
-	m_aabb.SetPosition(int(m_pos.x), int(m_pos.y));
+	m_bounds.SetDimension(136, 342);
+	m_bounds.SetPosition(int(m_pos.x), int(m_pos.y));
 
 	m_keys = TheInput::Instance()->GetKeyStates();
 
@@ -65,14 +65,14 @@ void Player::Update()
 			m_lightP.Draw(int(m_pos.x), int(m_pos.y), 0.0, Sprite::NO_FLIP);
 		}
 
-	case 4:
+	default:
 		if (!TheInput::Instance()->IsKeyPressed())
 		{
 			m_anim.Draw(int(m_pos.x), int(m_pos.y), 0.0, Sprite::NO_FLIP);
 		}
-	default:
-		break;
 	}
+
+
 
 }
 
@@ -106,18 +106,17 @@ void Player::IsVisible(bool flag)
 
 bool Player::IsColliding(GameObject& go)
 {
-	if (m_aabb.IsColliding(go.IsColliding))
+	if (go.IsColliding(m_bounds))
 	{
+		std::cout << "Player 1 Colliding\n";
 		return true;
 	}
 	else
-	{
 		return false;
-	}
 }
 
 AABB Player::GetColl()
 {
-	return AABB();
+	return m_bounds;
 }
 

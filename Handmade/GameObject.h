@@ -2,6 +2,7 @@
 #define GAME_OBJECT_H
 
 #include <glm.hpp>
+#include "AABB.h"
 
 
 class GameObject
@@ -23,6 +24,8 @@ public:
 	void IsAvtive(bool flag);
 	void IsVisible(bool flag);
 
+	bool IsColliding(AABB& otherObject);
+	AABB GetCollision();
 
 protected:
 	glm::vec2 m_pos;
@@ -32,6 +35,8 @@ protected:
 	bool m_isVisible;
 	bool m_isActive;
 	bool m_isAlive;
+
+	AABB m_bounds;
 };
 
 #endif 

@@ -24,8 +24,8 @@ Player2::Player2(glm::vec2 pos)
 	m_walk.SetSpriteDimension(176, 342);
 	m_walk.SetTextureDimension(6, 1, 88, 131);
 
-	m_aabb.SetDimension(226, 342);
-	m_aabb.SetPosition(int(m_pos.x), int(m_pos.y));
+	m_bounds.SetDimension(226, 342);
+	m_bounds.SetPosition(int(m_pos.x), int(m_pos.y));
 
 	m_keys = TheInput::Instance()->GetKeyStates();
 

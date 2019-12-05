@@ -30,6 +30,23 @@ void GameObject::IsVisible(bool flag)
 	m_isVisible = flag;
 }
 
+bool GameObject::IsColliding(AABB& otherObject)
+{
+	if (otherObject.IsColliding(m_bounds))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+AABB GameObject::GetCollision()
+{
+	return AABB();
+}
+
 GameObject::GameObject()
 {
 	m_pos = glm::vec2(0.0f);
