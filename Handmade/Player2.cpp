@@ -45,7 +45,7 @@ void Player2::Update()
 		if (m_keys[SDL_SCANCODE_L])
 		{
 			m_pos.x += 10.0f;
-			std::cout << "p1 moving right\n";
+			std::cout << "p2 moving right\n";
 			m_walk.Draw(int(m_pos.x), int(m_pos.y), 0.0, Sprite::HORIZONTAL);
 		}
 
@@ -53,14 +53,14 @@ void Player2::Update()
 		if (m_keys[SDL_SCANCODE_J])
 		{
 			m_pos.x -= 10.0f;
-			std::cout << "p1 moving left\n";
+			std::cout << "p2 moving left\n";
 			m_walk.Draw(int(m_pos.x), int(m_pos.y), 0.0, Sprite::HORIZONTAL);
 		}
 
 	case 3:
 		if (m_keys[SDL_SCANCODE_H])
 		{
-			std::cout << "P1 lightpunch";
+			std::cout << "P2 lightpunch\n";
 			m_lightP.Draw(int(m_pos.x), int(m_pos.y), 0.0, Sprite::HORIZONTAL);
 		}
 
@@ -103,4 +103,15 @@ void Player2::IsAvtive(bool flag)
 void Player2::IsVisible(bool flag)
 {
 
+}
+
+bool Player2::IsColliding(GameObject& go)
+{
+	if (go.IsColliding(m_bounds))
+	{
+		std::cout << "Player 2 Colliding with p1" << std::endl;
+		return true;
+	}
+	else
+		return false;
 }

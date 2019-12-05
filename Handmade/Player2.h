@@ -28,6 +28,7 @@ public:
 	void IsAvtive(bool flag);
 	void IsVisible(bool flag);
 
+	bool IsColliding(GameObject& go);
 
 protected:
 	Sprite m_sprite;

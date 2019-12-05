@@ -108,7 +108,7 @@ bool Player::IsColliding(GameObject& go)
 {
 	if (go.IsColliding(m_bounds))
 	{
-		std::cout << "Player 1 Colliding\n";
+		std::cout << "Player 1 Colliding with p2" << std::endl;
 		return true;
 	}
 	else
