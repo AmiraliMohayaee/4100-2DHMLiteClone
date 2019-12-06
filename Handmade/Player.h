@@ -32,7 +32,6 @@ public:
 	void IsVisible(bool flag);
 
 	bool IsColliding(GameObject& go);
-	AABB GetColl();
 
 protected:
 	Sprite m_sprite;

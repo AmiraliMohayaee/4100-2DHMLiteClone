@@ -110,9 +110,3 @@ bool Player::IsColliding(GameObject& go)
 	else
 		return false;
 }
-
-AABB Player::GetColl()
-{
-	return m_bounds;
-}
-

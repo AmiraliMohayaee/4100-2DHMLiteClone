@@ -42,9 +42,9 @@ bool GameObject::IsColliding(AABB& otherObject)
 	}
 }
 
-AABB GameObject::GetCollision()
+AABB const GameObject::GetCollision()
 {
-	return AABB();
+	return m_bounds;
 }
 
 GameObject::GameObject()

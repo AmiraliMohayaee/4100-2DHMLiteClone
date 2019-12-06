@@ -25,7 +25,7 @@ public:
 	void IsVisible(bool flag);
 
 	bool IsColliding(AABB& otherObject);
-	AABB GetCollision();
+	const AABB GetCollision();
 
 protected:
 	glm::vec2 m_pos;
