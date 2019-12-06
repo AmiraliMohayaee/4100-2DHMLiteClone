@@ -31,6 +31,8 @@ Player::Player(glm::vec2 pos)
 	m_keys = TheInput::Instance()->GetKeyStates();
 
 	m_pos = pos;
+
+	//&m_player2;
 }
 
 void Player::Draw()
@@ -40,39 +42,33 @@ void Player::Draw()
 
 void Player::Update()
 {
-	//m_anim.Draw(int(m_pos.x), int(m_pos.y), 0.0, Sprite::NO_FLIP);
+	//m_player2->Update();
 
-	switch (1)
-	{
-	case 1:
 		if (m_keys[SDL_SCANCODE_D])
 		{
 			m_pos.x += 10.0f;
 			std::cout << "p1 moving right\n";
 			m_walk.Draw(int(m_pos.x), int(m_pos.y), 0.0, Sprite::NO_FLIP);
 		}
-	case 2:
+
 		if (m_keys[SDL_SCANCODE_A])
 		{
 			m_pos.x -= 10.0f;
 			std::cout << "p1 moving left\n";
 			m_walk.Draw(int(m_pos.x), int(m_pos.y), 0.0, Sprite::NO_FLIP);
 		}
-	case 3:
+
 		if (m_keys[SDL_SCANCODE_F])
 		{
 			std::cout << "P1 lightpunch\n";
 			m_lightP.Draw(int(m_pos.x), int(m_pos.y), 0.0, Sprite::NO_FLIP);
 		}
 
-	default:
+		
 		if (!TheInput::Instance()->IsKeyPressed())
 		{
 			m_anim.Draw(int(m_pos.x), int(m_pos.y), 0.0, Sprite::NO_FLIP);
 		}
-	}
-
-
 
 }
 

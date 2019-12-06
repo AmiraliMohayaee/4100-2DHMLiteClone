@@ -8,7 +8,10 @@
 #include "Animation.h"
 #include "Audio.h"
 #include "AABB.h"
+#include "Player.h"
 
+
+class Player;
 
 class Player2 : public GameObject
 {
@@ -40,6 +43,8 @@ protected:
 	// Implementing input for player object as
 	// not all GOs need to get or return input
 	const Uint8* m_keys = nullptr;
+
+	Player* m_player1;
 };
 
 #endif

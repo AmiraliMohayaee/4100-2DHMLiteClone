@@ -48,6 +48,8 @@ void PlayState::Draw()
 {
 	m_background->Draw();
 	m_textDraw.Draw(100, 100);
+	//m_player1->Draw();
+	//m_player2->Draw();
 }
 
 void PlayState::Update()
@@ -74,9 +76,9 @@ void PlayState::Update()
 			m_endState = true;
 		}
 
-		glm::vec2 mouseMotion = TheInput::Instance()->GetMouseMotion();
+		//glm::vec2 mouseMotion = TheInput::Instance()->GetMouseMotion();
 		//std::cout << mouseMotion.x << ", " << mouseMotion.y << std::endl;
-		glm::vec2 mousePos = TheInput::Instance()->GetMousePosition();
+		//glm::vec2 mousePos = TheInput::Instance()->GetMousePosition();
 		//std::cout << mousePos.x << ", " << mousePos.y << std::endl;
 
 
@@ -85,6 +87,7 @@ void PlayState::Update()
 		m_player1->Update();
 		m_player2->Update();
 
+		
 		// swapping buffers
 		TheScreen::Instance()->Draw();
 	}

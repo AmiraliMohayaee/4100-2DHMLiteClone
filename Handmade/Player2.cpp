@@ -30,18 +30,18 @@ Player2::Player2(glm::vec2 pos)
 	m_keys = TheInput::Instance()->GetKeyStates();
 
 	m_pos = pos;
+	
+	//&m_player1;
 }
 
 void Player2::Draw()
 {
-
+	//m_anim.Draw();
 }
 
 void Player2::Update()
 {
-	switch (1)
-	{
-	case 1:
+
 		if (m_keys[SDL_SCANCODE_L])
 		{
 			m_pos.x += 10.0f;
@@ -49,7 +49,7 @@ void Player2::Update()
 			m_walk.Draw(int(m_pos.x), int(m_pos.y), 0.0, Sprite::HORIZONTAL);
 		}
 
-	case 2:
+	
 		if (m_keys[SDL_SCANCODE_J])
 		{
 			m_pos.x -= 10.0f;
@@ -57,22 +57,20 @@ void Player2::Update()
 			m_walk.Draw(int(m_pos.x), int(m_pos.y), 0.0, Sprite::HORIZONTAL);
 		}
 
-	case 3:
+	
 		if (m_keys[SDL_SCANCODE_H])
 		{
 			std::cout << "P2 lightpunch\n";
 			m_lightP.Draw(int(m_pos.x), int(m_pos.y), 0.0, Sprite::HORIZONTAL);
+			//m_player1->IsColliding(m_player2->GetCollision());
 		}
-
-	case 4:
+		
+	
 		if (!TheInput::Instance()->IsKeyPressed())
 		{
 			m_anim.Draw(int(m_pos.x), int(m_pos.y), 0.0, Sprite::HORIZONTAL);
 		}
 
-	default:
-		break;
-	}
 }
 
 bool Player2::IsAlive()
