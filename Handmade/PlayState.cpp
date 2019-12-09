@@ -13,7 +13,7 @@ bool PlayState::Initialize(const std::string name, int width, int height)
 	TheScreen::Instance()->SetClearColor(0, 0, 0);
 
 	//initialize audio
-	TheAudio::Instance()->Initialize();
+	TheAudio::Instance()-> Initialize();
 	TheTexture::Instance()->Initialize();
 
 
